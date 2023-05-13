@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Hack On Nostr - Bitcoin Library 📚️</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Hack On Nostr - Bitcoin Library 📚️</h1>
+</section>
+
+<section class="slide level1">
+
+<style>
+.sourceCode {
+  overflow: auto !important;
+}
+.container{
+  display: flex;
+}
+.col {
+  flex: 1;
+  object-fit: contain;
+}
+</style>
+<p><img data-src="../images/cc-0.png" /></p>
+</section>
+<section id="bitcoin-library" class="slide level1">
+<h1>Bitcoin Library</h1>
+<p>A decentralized approach for community based web annotation using
+Nostr</p>
+<p><img data-src="../images/btc-lib-logo.png" /></p>
+</section>
+<section id="me" class="slide level1">
+<h1>ME</h1>
+<p>Steffen</p>
+<p>aka <span class="citation" data-cites="steffenr42">@steffenr42</span>
+or <span class="citation" data-cites="laoc42">@laoc42</span></p>
+<p>Researcher and Software Developer in the field of Open Education</p>
+<p>🧡 💜</p>
+<p><a
+href="https://snort.social/p/npub1r30l8j4vmppvq8w23umcyvd3vct4zmfpfkn4c7h2h057rmlfcrmq9xt9ma">Find
+me on Snort</a></p>
+</section>
+<section class="slide level1">
+
+<h2 id="agenda">Agenda</h2>
+<ul>
+<li>What’s the Problem?</li>
+<li>Bitcoin Library: Demo</li>
+<li>Bitcoin Library: Under the Hood</li>
+<li>NIPs used and future development</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h2 id="whats-the-problem">What’s the Problem?</h2>
+<p>Lots of great educational resources about any kind of topic out
+there</p>
+</section>
+<section class="slide level1">
+
+<p><strong>BUT</strong> we lack a service to collaborativley
+<em>collect</em>, <em>annotate</em> and <em>share</em> these
+resources</p>
+<p>➡️ to make them <em>accessible</em> for teachers and learners</p>
+<p>❌ <strong>without</strong> building another centralized platform</p>
+</section>
+<section class="slide level1">
+
+<p>Requirements for educational services (about highly controversial
+topics):</p>
+<ul>
+<li>decentralized</li>
+<li>censorship-resistant</li>
+<li>Value 4 Value</li>
+</ul>
+<p>(V4V Because the content might not be funded from the state or
+similiar)</p>
+</section>
+<section class="slide level1">
+
+<h3 id="nostr-ftw">Nostr FTW!</h3>
+<ul>
+<li>By design decentralized</li>
+<li>Hard to censor</li>
+<li>Affinity to Bitcoin and Lightning facilitates V4V</li>
+</ul>
+</section>
+<section id="demo" class="slide level1">
+<h1>DEMO</h1>
+</section>
+<section class="slide level1">
+
+<h3 id="components-of-the-bitcoin-library">Components of the Bitcoin
+Library</h3>
+<ul>
+<li>Metadata-Editor to annotate web resources (Browser Extension)</li>
+<li>“Note Fetcher” to collect notes and transform them</li>
+<li>Frontend to display and search through resources</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h3 id="browser-extension">Browser Extension</h3>
+<div class="container">
+<div class="col">
+<ul>
+<li>Simple Metadata Editor</li>
+<li>JSON Schema</li>
+<li>SKOS (Simple Knowledge Organization System)</li>
+</ul>
+</div>
+<div class="col">
+<p><img data-src="../images/md-editor.png" style="width:50.0%" /></p>
+</div>
+</div>
+</section>
+<section class="slide level1">
+
+<h3 id="metadata-attributes-as-nostr-bots">Metadata Attributes as Nostr
+Bots</h3>
+<div class="container">
+<div class="col">
+<p><img data-src="../images/select-field.png" /></p>
+</div>
+<div class="col">
+<ul>
+<li>SKOS Concepts (i.e. controlled vocabularies) set up as bots.</li>
+<li>Every selected entry will repost the resource.</li>
+<li>So you can follow these bots (and later send them resources as
+well)</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="slide level1">
+
+<p><img data-src="../images/event-from-bot.png"
+style="width:50.0%" /></p>
+</section>
+<section class="slide level1">
+
+<h3 id="note-fetcher">Note Fetcher</h3>
+<ul>
+<li>ETL-work</li>
+<li>polls the relay every 5 seconds to retrieve new data</li>
+<li>Either pushes it directly to the index if URL of resource does not
+exist</li>
+<li><strong>OR</strong> Merges the metadata with existing metadata in
+the index</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h3 id="frontend">Frontend</h3>
+<p><img data-src="../images/frontend.png" /></p>
+</section>
+<section class="slide level1">
+
+<h3 id="challenge-differing-metadata-annotations">Challenge: Differing
+Metadata Annotations</h3>
+<p>In a decentralized annotation system, metadata for the same resource
+will differ sooner or later</p>
+<p>How to handle this?</p>
+</section>
+<section class="slide level1">
+
+<ul>
+<li>The note fetcher merges the metadata and sets it in proportion with
+attributes that were already given. The frontend resembles that through
+opacity of the tags.</li>
+</ul>
+<p><img data-src="../images/tags.png" /></p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="../images/zaps.png" /></p>
+<p>It is not yet an implementation of <a
+href="https://github.com/nostr-protocol/nips/blob/master/57.md">(NIP-57)</a>,
+but we use the LUD16 field of the profiles retrieved via the npub of the
+actor. Then the payment is made using simple WebLN standard</p>
+</section>
+<section class="slide level1">
+
+<h2 id="thats-it">That’s it?</h2>
+<p>Basically yes.</p>
+<p>But you might have noticed:</p>
+<p><em>There is no data in the code</em></p>
+</section>
+<section class="slide level1">
+
+<h2 id="easy-to-adopt">Easy to adopt</h2>
+<p>The usage of JSON Schema and SKOS makes the whole approach easily
+adaptable.</p>
+<p>Want to build a library (community) for recipes?</p>
+<p>➡️ Create a JSON Schema for it and some vocabularies and go!</p>
+</section>
+<section class="slide level1">
+
+<h3 id="nips-used">NIPs used</h3>
+<ul>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/01.md">NIP-1</a></li>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/07.md">NIP-7</a>
+<code>window.nostr</code>; Login with Alby</li>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/10.md">NIP-10</a>
+to identify the bot in the event</li>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/19.md">NIP-19</a>
+so clients can correctly substitute npubs with the nostr actors name (if
+provided)</li>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/51.md#nip-51">NIP51</a>
+for building lists of interesting content (see <a
+href="https://listr.lol/" class="uri">https://listr.lol/</a>)</li>
+<li><a
+href="https://github.com/nostr-protocol/nips/blob/master/57.md">(NIP-57)</a>
+retrieving lud16 fields from a provided npub to tip the authors</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h2 id="future-developments">Future Developments</h2>
+<ul>
+<li>go public</li>
+<li>fill with resources</li>
+<li>think about UX for mobile users</li>
+<li>build a community</li>
+<li>add i18n</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h3 id="questions-discussion">Questions / Discussion</h3>
+<p>Thank you!</p>
+</section>
+<section class="slide level1">
+
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
